@@ -15,8 +15,6 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-const randomCharacter = [getRandomLower(), getRandomUpper(), getRandomNumber(), getRandomSymbol()];
-
 // !GENERATE PASSWORD FUNCTION
 function generatePassword() {
     const passwordLengthInput = window.prompt(`How long would you like your password to be? (8 -128)`);
@@ -27,8 +25,6 @@ function generatePassword() {
         window.alert(`This input is outside the input parameters. Please input a number between 8 - 128.`);
         return generatePassword();
     }
-
-    console.log(passwordLength);
 
     const includeLowercase = window.confirm(`Would you like lowercase in your password?`);
     const includeUppercase = window.confirm(`Would you like uppercase in your password?`);
