@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 // TODO: Assignment code here
 // Generator Functions
 function getRandomLower() {
@@ -22,13 +23,9 @@ function generatePassword() {
 
     const passwordLength = parseInt(passwordLengthInput);
 
-    if (Number.isNaN(passwordLength)) {
-        window.alert(`This input is not a number! Please input a number between 8 - 128.`);
-        return;
-    }
-    if (passwordLength < 8 || passwordLength > 128) {
+    if (passwordLength < 8 || passwordLength > 128 || Number.isNaN(passwordLength)) {
         window.alert(`This input is outside the input parameters. Please input a number between 8 - 128.`);
-        return;
+        return generatePassword();
     }
 
     console.log(passwordLength);
@@ -39,31 +36,38 @@ function generatePassword() {
     const includeSymbols = window.confirm(`Would you like symbols in your password?`);
 
     const characterArr = [];
-    if (includeLowercase === true) {
-        characterArr.push(getRandomLower());
-    }
-    if (includeUppercase === true) {
-        characterArr.push(getRandomUpper());
-    }
-    if (includeNumbers === true) {
-        characterArr.push(getRandomNumber());
-    }
-    if (includeSymbols === true) {
-        characterArr.push(getRandomSymbol());
-    }
-    if (characterArr.length === 0) {
-        characterArr.push(getRandomLower());
-    }
 
-    function generate() {
-        for (let i = 0; i < passwordLength; i += 1) {
-            debugger;
-            const randomChar = randomCharacter[Math.floor(Math.random() * randomCharacter.length)];
-            characterArr.push(randomChar);
+    for (let i = 0; i < passwordLength; ) {
+        if (includeLowercase === true) {
+            characterArr.push(getRandomLower());
+            i++;
+            if (i === passwordLength) {
+                break;
+            }
+        }
+        if (includeUppercase === true) {
+            characterArr.push(getRandomUpper());
+            i++;
+            if (i === passwordLength) {
+                break;
+            }
+        }
+        if (includeNumbers === true) {
+            characterArr.push(getRandomNumber());
+            i++;
+            if (i === passwordLength) {
+                break;
+            }
+        }
+        if (includeSymbols === true) {
+            characterArr.push(getRandomSymbol());
+            i++;
+            if (i === passwordLength) {
+                break;
+            }
         }
     }
-    generate();
-    console.log(characterArr);
+    return characterArr.join(``);
 }
 
 // Get references to the #generate element
